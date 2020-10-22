@@ -44,7 +44,7 @@ class Address extends CastableDataTransferObject
 
 ### 2. Configure your Eloquent attribute to cast to it:
 
-Note that this should be `jsonb` or `json` column in your database schema.
+Note that this should be a `jsonb` or `json` column in your database schema.
 
 ```php
 namespace App\Models;
@@ -60,9 +60,34 @@ class User extends Model
 }
 ```
 
-And that's it! You can pass either an instance of your `Address` class, or even just an array with a compatible structure. It will automatically be cast to and from your class and JSON for storage.
+And that's it! You can now pass either an instance of your `Address` class, or even just an array with a compatible structure. It will automatically be cast between your class and JSON for storage and the data will be validated on the way in and out.
 
-Your data will be validated on the way in and out. But the best part is that you can decorate your class with domain-specific methods to turn it into a powerful value object.
+```php
+$user = User::create([
+    // ...
+    'address' => [
+        'street' => '1640 Riverside Drive',
+        'suburb' => 'Hill Valley',
+        'state' => 'California',
+    ],
+])
+
+$residents = User::where('address->suburb', 'Hill Valley')->get();
+```
+
+But the best part is that you can decorate your class with domain-specific methods to turn it into a powerful value object.
+
+```php
+$user->address->toMapUrl();
+
+$user->address->getCoordinates();
+
+$user->address->getPostageCost($sender);
+
+$user->address->calculateDistance($otherUser->address);
+
+echo (string) $user->address;
+```
 
 ### Testing
 
