@@ -41,6 +41,8 @@ class Address extends CastableDataTransferObject
 }
 ```
 
+(Note: I like to put these in `App\Values` because I'm using them as a value object and not just a plain DTO. Feel free to put it anywhere you like!)
+
 ### 2. Configure your Eloquent attribute to cast to it:
 
 Note that this should be a `jsonb` or `json` column in your database schema.
