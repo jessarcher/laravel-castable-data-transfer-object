@@ -77,6 +77,16 @@ class CastableDataTransferObjectTest extends TestCase
             ],
         ]);
     }
+
+    /** @test */
+    public function it_handles_nullable_columns()
+    {
+        $user = User::factory()->create(['address' => null]);
+
+        $this->assertDatabaseHas('users', ['address' => null]);
+
+        $this->assertNull($user->refresh()->address);
+    }
 }
 
 class Address extends CastableDataTransferObject
