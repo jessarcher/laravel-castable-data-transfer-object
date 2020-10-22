@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 use JessArcher\CastableDataTransferObject\CastableDataTransferObject;
 use Spatie\DataTransferObject\DataTransferObjectError;
 
@@ -67,7 +68,7 @@ class CastableDataTransferObjectTest extends TestCase
     }
 
     /** @test */
-    public function it_throws_exceptions_for_incorrect_data()
+    public function it_throws_exceptions_for_incorrect_data_structures()
     {
         $this->expectException(DataTransferObjectError::class);
 
@@ -75,6 +76,16 @@ class CastableDataTransferObjectTest extends TestCase
             'address' => [
                 'bad' => 'thing',
             ],
+        ]);
+    }
+
+    /** @test */
+    public function it_rejects_invalid_types()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        User::factory()->create([
+            'address' => 'string',
         ]);
     }
 
