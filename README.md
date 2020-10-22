@@ -26,7 +26,7 @@ composer require jessarcher/laravel-castable-data-transfer-object
 
 ### 1. Create your `CastableDataTransferObject`
 
-Check out readme for Spatie's [data transfer object](https://github.com/spatie/data-transfer-object) package to find out more about what their `DataTransferObject` class can do.
+Check out the readme for Spatie's [data transfer object](https://github.com/spatie/data-transfer-object) package to find out more about what their `DataTransferObject` class can do.
 
 ``` php
 namespace App\Values;
