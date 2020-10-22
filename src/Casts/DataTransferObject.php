@@ -26,7 +26,7 @@ class DataTransferObject implements CastsAttributes
             return;
         }
 
-        return new $this->class(json_decode($value, true));
+        return $this->class::fromJson($value);
     }
 
     /**
@@ -46,6 +46,6 @@ class DataTransferObject implements CastsAttributes
             throw new InvalidArgumentException("Value must be of type [$this->class], array, or null");
         }
 
-        return json_encode($value->toArray());
+        return $value->toJson();
     }
 }
