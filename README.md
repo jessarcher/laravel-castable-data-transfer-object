@@ -4,7 +4,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/jessarcher/laravel-castable-data-transfer-object.svg?style=flat-square)](https://scrutinizer-ci.com/g/jessarcher/laravel-castable-data-transfer-object)
 [![Total Downloads](https://img.shields.io/packagist/dt/jessarcher/laravel-castable-data-transfer-object.svg?style=flat-square)](https://packagist.org/packages/jessarcher/laravel-castable-data-transfer-object)
 
-Laravel is awesome. Spatie's [data transfer object](https://github.com/spatie/data-transfer-object) package for PHP is awesome. They're already good friends, but now they're they're taking their relationship to the next level 💕
+Laravel is awesome. Spatie's [data transfer object](https://github.com/spatie/data-transfer-object) package for PHP is awesome. They're already good friends, but now they're taking their relationship to the next level 💕
 
 Have you ever wanted to cast your JSON columns to a value object?
 
