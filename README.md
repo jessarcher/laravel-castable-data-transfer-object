@@ -5,9 +5,13 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/jessarcher/laravel-castable-data-transfer-object.svg?style=flat-square)](https://scrutinizer-ci.com/g/jessarcher/laravel-castable-data-transfer-object)
 [![Total Downloads](https://img.shields.io/packagist/dt/jessarcher/laravel-castable-data-transfer-object.svg?style=flat-square)](https://packagist.org/packages/jessarcher/laravel-castable-data-transfer-object)
 
-Laravel is awesome. Spatie's data transfer object package for PHP is awesome. They're already good friends, but now they're they're taking their relationship to the next level 💕
+Laravel is awesome. Spatie's [data transfer object](https://github.com/spatie/data-transfer-object) package for PHP is awesome. They're already good friends, but now they're they're taking their relationship to the next level 💕
 
-Have you ever wanted to cast your JSON columns to a value object? This package gives you a castable version of Spatie's `DataTransferObject` class, called `CastableDataTransferObject`.
+Have you ever wanted to cast your JSON columns to a value object?
+
+This package gives you an extended version of Spatie's `DataTransferObject` class, called `CastableDataTransferObject`.
+
+Under the hood it implements Laravel's [`Castable` interface](https://laravel.com/docs/8.x/eloquent-mutators#castables) with a Laravel [custom cast](https://laravel.com/docs/8.x/eloquent-mutators#custom-casts) that handles serializing between the `DataTransferObject` (or a compatible array) and your JSON database column.
 
 Check out the blog post at https://jessarcher.com/blog/casting-json-columns-to-value-objects/
 
@@ -21,7 +25,9 @@ composer require jessarcher/laravel-castable-data-transfer-object
 
 ## Usage
 
-### 1. Create your `CastableDataTransferObject`:
+### 1. Create your `CastableDataTransferObject`
+
+Check out readme for Spatie's [data transfer object](https://github.com/spatie/data-transfer-object) package to find out more about what their `DataTransferObject` class can do.
 
 ``` php
 namespace App\Values;
@@ -49,12 +55,14 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     protected $casts = [
-        'address' => Address::class
+        'address' => Address::class,
     ];
 }
 ```
 
-And that's it!
+And that's it! You can pass either an instance of your `Address` class, or even just an array with a compatible structure. It will automatically be cast to and from your class and JSON for storage.
+
+Your data will be validated on the way in and out. But the best part is that you can decorate your class with domain-specific methods to turn it into a powerful value object.
 
 ### Testing
 
