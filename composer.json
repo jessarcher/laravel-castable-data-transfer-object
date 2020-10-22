@@ -1,0 +1,51 @@
+{
+    "name": "jessarcher/laravel-castable-data-transfer-object",
+    "description": "Automatically cast JSON columns to rich PHP objects in Laravel using Spatie's data-transfer-object class",
+    "keywords": [
+        "jessarcher",
+        "laravel-castable-data-transfer-object",
+        "castable-data-transfer-object",
+        "data-transfer-object",
+        "laravel-castable-value-object",
+        "castable-value-object",
+        "value-object"
+    ],
+    "homepage": "https://github.com/jessarcher/laravel-castable-data-transfer-object",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jess Archer",
+            "email": "jess@jessarcher.com",
+            "homepage": "https://jessarcher.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "illuminate/contracts": "^8.0",
+        "spatie/data-transfer-object": "^2.5.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "JessArcher\\CastableDataTransferObject\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JessArcher\\CastableDataTransferObject\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
