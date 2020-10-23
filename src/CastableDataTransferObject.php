@@ -10,7 +10,7 @@ use function Safe\json_encode;
 
 abstract class CastableDataTransferObject extends DataTransferObject implements Castable
 {
-    public static function castUsing(array $attributes)
+    public static function castUsing(array $arguments)
     {
         return new DataTransferObjectCast(static::class);
     }
