@@ -9,26 +9,37 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+        matrix:
+            os: [ubuntu-latest]
+            php: [ 8.0, 7.4]
+
+    name: PHP ${ matrix.php } - ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v2
+        - uses: actions/checkout@v2
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate
+        - name: Cache Composer packages
+          id: composer-cache
+          uses: actions/cache@v2
+          with:
+            path: vendor
+            key: ${{ matrix.os }}-php-${ matrix.php }-${{ hashFiles('**/composer.lock') }}
+            restore-keys: |
+              ${{ matrix.os }}-php-
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v2
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+        - name: Setup PHP
+          uses: shivammathur/setup-php@v2
+          with:
+              php-version: ${{ matrix.php }}
 
-    - name: Install dependencies
-      if: steps.composer-cache.outputs.cache-hit != 'true'
-      run: composer install --prefer-dist --no-progress --no-suggest
+        - name: Validate composer.json and composer.lock
+          run: composer validate
 
-    - name: Run test suite
-      run: composer run-script test
+        - name: Install dependencies
+          if: steps.composer-cache.outputs.cache-hit != 'true'
+          run: composer install --prefer-dist --no-progress --no-interaction
+
+        - name: Run test suite
+          run: composer run-script test
