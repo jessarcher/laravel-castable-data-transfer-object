@@ -49,7 +49,7 @@ class CastableDataTransferObjectTest extends TestCase
     }
 
     /** @test */
-    public function it_json_to_a_data_transfer_object()
+    public function it_casts_json_to_a_data_transfer_object()
     {
         $user = User::factory()->create([
             'address' => [
