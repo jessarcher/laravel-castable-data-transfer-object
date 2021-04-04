@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use JessArcher\CastableDataTransferObject\CastableDataTransferObject;
-use Spatie\DataTransferObject\DataTransferObjectError;
+use TypeError;
 
 class CastableDataTransferObjectTest extends TestCase
 {
@@ -70,7 +70,7 @@ class CastableDataTransferObjectTest extends TestCase
     /** @test */
     public function it_throws_exceptions_for_incorrect_data_structures()
     {
-        $this->expectException(DataTransferObjectError::class);
+        $this->expectException(TypeError::class);
 
         User::factory()->create([
             'address' => [
