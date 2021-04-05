@@ -7,15 +7,10 @@ use InvalidArgumentException;
 
 class DataTransferObject implements CastsAttributes
 {
-    protected string $class;
-
-    /**
-     * @param string $class The DataTransferObject class to cast to
-     */
-    public function __construct(string $class)
-    {
-        $this->class = $class;
-    }
+    public function __construct(
+        /** @var string The DataTransferObject class to cast to */
+        protected string $class,
+    ) {}
 
     /**
      * Cast the stored value to the configured DataTransferObject.
