@@ -22,8 +22,8 @@ abstract class CastableDataTransferObject extends DataTransferObject implements 
         return json_encode($this->toArray(), $options);
     }
 
-    public static function fromJson(string $json)
+    public static function fromJson(string $json, int $options = 0)
     {
-        return new static(json_decode($json, true));
+        return new static(json_decode($json, assoc: true, options: $options));
     }
 }

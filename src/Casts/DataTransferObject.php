@@ -4,6 +4,8 @@ namespace JessArcher\CastableDataTransferObject\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use InvalidArgumentException;
+use JessArcher\CastableDataTransferObject\CastUsingJsonFlags;
+use ReflectionClass;
 
 class DataTransferObject implements CastsAttributes
 {
@@ -21,7 +23,7 @@ class DataTransferObject implements CastsAttributes
             return;
         }
 
-        return $this->class::fromJson($value);
+        return $this->class::fromJson($value, $this->getJsonFlags()->decode);
     }
 
     /**
@@ -41,6 +43,15 @@ class DataTransferObject implements CastsAttributes
             throw new InvalidArgumentException("Value must be of type [$this->class], array, or null");
         }
 
-        return $value->toJson();
+        return $value->toJson($this->getJsonFlags()->encode);
+    }
+
+    protected function getJsonFlags(): CastUsingJsonFlags
+    {
+         $attributes = (new ReflectionClass($this->class))
+            ->getAttributes(CastUsingJsonFlags::class);
+
+         return ($attributes[0] ?? null)?->newInstance()
+             ?? new CastUsingJsonFlags();
     }
 }
