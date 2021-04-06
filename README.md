@@ -125,6 +125,7 @@ If you discover any security related issues, please email jess@jessarcher.com in
 ## Credits
 
 - [Jess Archer](https://github.com/jessarcher)
+- [Jeremiasz Major](https://github.com/jrmajor)
 - [All Contributors](../../contributors)
 
 ## License
