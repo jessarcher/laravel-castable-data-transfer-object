@@ -31,7 +31,7 @@
         "brianium/paratest": "^6.2",
         "mockery/mockery": "^1.4",
         "nunomaduro/collision": "^5.3",
-        "orchestra/testbench": "^6.4",
+        "orchestra/testbench": "^6.15",
         "phpunit/phpunit": "^9.5",
         "vimeo/psalm": "^4.4"
     },
