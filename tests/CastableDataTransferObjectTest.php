@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use JessArcher\CastableDataTransferObject\CastableDataTransferObject;
+use JessArcher\CastableDataTransferObject\CastUsingJsonFlags;
 use TypeError;
 
 class CastableDataTransferObjectTest extends TestCase
@@ -98,6 +99,34 @@ class CastableDataTransferObjectTest extends TestCase
 
         $this->assertNull($user->refresh()->address);
     }
+
+    /** @test */
+    public function cast_uses_specified_flags_for_arrays()
+    {
+        $user = User::factory()->create([
+            'with_flags' => ['floatValue' => 52.0],
+            'without_flags' => ['floatValue' => 20.0],
+        ]);
+
+        $user = User::whereId($user->id)->toBase()->first();
+
+        $this->assertSame('{"floatValue":52.0}', $user->with_flags);
+        $this->assertSame('{"floatValue":20}', $user->without_flags);
+    }
+
+    /** @test */
+    public function cast_uses_specified_flags_for_data_transfer_objects()
+    {
+        $user = User::factory()->create([
+            'with_flags' => new DataTransferObjectWithFlags(floatValue: 52.0),
+            'without_flags' => new DataTransferObjectWithoutFlags(floatValue: 20.0),
+        ]);
+
+        $user = User::whereId($user->id)->toBase()->first();
+
+        $this->assertSame('{"floatValue":52.0}', $user->with_flags);
+        $this->assertSame('{"floatValue":20}', $user->without_flags);
+    }
 }
 
 class Address extends CastableDataTransferObject
@@ -107,12 +136,25 @@ class Address extends CastableDataTransferObject
     public string $state;
 }
 
+#[CastUsingJsonFlags(encode: JSON_PRESERVE_ZERO_FRACTION)]
+class DataTransferObjectWithFlags extends CastableDataTransferObject
+{
+    public float $floatValue;
+}
+
+class DataTransferObjectWithoutFlags extends CastableDataTransferObject
+{
+    public float $floatValue;
+}
+
 class User extends Model
 {
     use HasFactory;
 
     protected $casts = [
         'address' => Address::class,
+        'with_flags' => DataTransferObjectWithFlags::class,
+        'without_flags' => DataTransferObjectWithoutFlags::class,
     ];
 
     protected static function newFactory()

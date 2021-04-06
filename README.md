@@ -92,6 +92,18 @@ $user->address->calculateDistance($otherUser->address);
 echo (string) $user->address;
 ```
 
+### Controlling serialization
+
+You may provide caster with flags to be used for serialization by adding `CastUsingJsonFlags` attribute to your object:
+
+```php
+use JessArcher\CastableDataTransferObject\CastableDataTransferObject;
+use JessArcher\CastableDataTransferObject\CastUsingJsonFlags;
+
+#[CastUsingJsonFlags(encode: JSON_PRESERVE_ZERO_FRACTION)]
+class Address extends CastableDataTransferObject {}
+```
+
 ### Testing
 
 ``` bash
