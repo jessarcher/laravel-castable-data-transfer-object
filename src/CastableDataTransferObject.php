@@ -6,9 +6,9 @@ use Illuminate\Contracts\Database\Eloquent\Castable;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use JessArcher\CastableDataTransferObject\Casts\DataTransferObject as DataTransferObjectCast;
-use Spatie\DataTransferObject\DataTransferObject;
 use function Safe\json_decode;
 use function Safe\json_encode;
+use Spatie\DataTransferObject\DataTransferObject;
 
 abstract class CastableDataTransferObject extends DataTransferObject implements Castable, Arrayable, Jsonable
 {
