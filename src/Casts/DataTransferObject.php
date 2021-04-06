@@ -12,7 +12,8 @@ class DataTransferObject implements CastsAttributes
     public function __construct(
         /** @var string The DataTransferObject class to cast to */
         protected string $class,
-    ) {}
+    ) {
+    }
 
     /**
      * Cast the stored value to the configured DataTransferObject.
@@ -48,10 +49,10 @@ class DataTransferObject implements CastsAttributes
 
     protected function getJsonFlags(): CastUsingJsonFlags
     {
-         $attributes = (new ReflectionClass($this->class))
+        $attributes = (new ReflectionClass($this->class))
             ->getAttributes(CastUsingJsonFlags::class);
 
-         return ($attributes[0] ?? null)?->newInstance()
+        return ($attributes[0] ?? null)?->newInstance()
              ?? new CastUsingJsonFlags();
     }
 }
