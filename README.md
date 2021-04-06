@@ -95,7 +95,7 @@ echo (string) $user->address;
 
 ### Controlling serialization
 
-You may provide caster with flags to be used for serialization by adding `CastUsingJsonFlags` attribute to your object:
+You may provide the caster with flags to be used for serialization by adding the `CastUsingJsonFlags` attribute to your object:
 
 ```php
 use JessArcher\CastableDataTransferObject\CastableDataTransferObject;
