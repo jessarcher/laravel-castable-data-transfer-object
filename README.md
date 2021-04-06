@@ -1,7 +1,7 @@
 # Laravel Castable Data Transfer Object
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/jessarcher/laravel-castable-data-transfer-object.svg?style=flat-square)](https://packagist.org/packages/jessarcher/laravel-castable-data-transfer-object)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/jessarcher/laravel-castable-data-transfer-object/run-tests?label=tests)](https://github.com/jessarcher/laravel-castable-data-transfer-object/actions?query=workflow%3ATests+branch%3Amain)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/jessarcher/laravel-castable-data-transfer-object/run-tests?label=tests)](https://github.com/jessarcher/laravel-castable-data-transfer-object/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/jessarcher/laravel-castable-data-transfer-object/Check%20&%20fix%20styling?label=code%20style)](https://github.com/jessarcher/laravel-castable-data-transfer-object/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/jessarcher/laravel-castable-data-transfer-object.svg?style=flat-square)](https://packagist.org/packages/jessarcher/laravel-castable-data-transfer-object)
 
