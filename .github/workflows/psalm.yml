@@ -1,6 +1,10 @@
 name: Psalm
 
 on:
+  pull_request:
+    paths:
+      - '**.php'
+      - 'psalm.xml.dist'
   push:
     paths:
       - '**.php'
