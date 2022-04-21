@@ -12,6 +12,8 @@ class DataTransferObject implements CastsAttributes
     public function __construct(
         /** @var string The DataTransferObject class to cast to */
         protected string $class,
+        /** @var array The cast parameters specified */
+        protected array $parameters = [],
     ) {
     }
 
@@ -20,6 +22,10 @@ class DataTransferObject implements CastsAttributes
      */
     public function get($model, string $key, $value, array $attributes)
     {
+        if (is_null($value) && in_array('nullable', $this->parameters)) {
+            $value = '{}';
+        }
+
         if (is_null($value)) {
             return;
         }

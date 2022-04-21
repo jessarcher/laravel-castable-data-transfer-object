@@ -127,6 +127,17 @@ class CastableDataTransferObjectTest extends TestCase
         $this->assertSame('{"floatValue":52.0}', $user->with_flags);
         $this->assertSame('{"floatValue":20}', $user->without_flags);
     }
+
+    /** @test */
+    public function it_passes_null_values_to_caster_when_nullable_cast_attribute_present()
+    {
+        $user = User::factory()->create(['settings' => null]);
+
+        $this->assertDatabaseHas('users', ['settings' => null]);
+
+        $this->assertInstanceOf(Settings::class, $user->refresh()->settings);
+        $this->assertEquals('Default', $user->settings->title);
+    }
 }
 
 class Address extends CastableDataTransferObject
@@ -147,6 +158,11 @@ class DataTransferObjectWithoutFlags extends CastableDataTransferObject
     public float $floatValue;
 }
 
+class Settings extends CastableDataTransferObject
+{
+    public string $title = 'Default';
+}
+
 class User extends Model
 {
     use HasFactory;
@@ -155,6 +171,7 @@ class User extends Model
         'address' => Address::class,
         'with_flags' => DataTransferObjectWithFlags::class,
         'without_flags' => DataTransferObjectWithoutFlags::class,
+        'settings' => Settings::class . ':nullable',
     ];
 
     protected static function newFactory()
