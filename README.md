@@ -93,6 +93,40 @@ $user->address->calculateDistance($otherUser->address);
 echo (string) $user->address;
 ```
 
+
+### Using defaults for null database values
+
+By default, if a database value is `null`, then the model attribute will also be `null`. However, sometimes you might want to instantiate the attribute with some default values.
+
+To achieve this, you may provide an additional `nullable` [Cast Parameter](https://laravel.com/docs/eloquent-mutators#cast-parameters) to ensure the caster gets instantiated.
+
+```php
+namespace App\Models;
+
+use App\Values\Address;
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    protected $casts = [
+        'settings' => Settings::class . ':nullable',
+    ];
+}
+```
+
+This will ensure that the `Settings` caster is instantiated even when the `settings` column in the database is `null`.
+
+You may then specify some default values in the cast which will be used instead.
+
+```php
+use JessArcher\CastableDataTransferObject\CastableDataTransferObject;
+
+class Settings extends CastableDataTransferObject 
+{
+    public string $title = 'Default';
+}
+```
+
 ### Controlling serialization
 
 You may provide the caster with flags to be used for serialization by adding the `CastUsingJsonFlags` attribute to your object:

@@ -14,7 +14,7 @@ abstract class CastableDataTransferObject extends DataTransferObject implements 
 {
     public static function castUsing(array $arguments)
     {
-        return new DataTransferObjectCast(static::class);
+        return new DataTransferObjectCast(static::class, $arguments);
     }
 
     public function toJson($options = 0)
