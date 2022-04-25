@@ -12,9 +12,9 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 abstract class CastableDataTransferObject extends DataTransferObject implements Castable, Arrayable, Jsonable
 {
-    public static function castUsing(array $parameters)
+    public static function castUsing(array $arguments)
     {
-        return new DataTransferObjectCast(static::class, $parameters);
+        return new DataTransferObjectCast(static::class, $arguments);
     }
 
     public function toJson($options = 0)
